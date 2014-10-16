@@ -66,7 +66,7 @@ var Level = Sandbox.extend({
 
     // if there is a multiview in the beginning, open that
     // and let it resolve our deferred
-    if (this.level.startDialog && !this.testOption('noIntroDialog')) {
+    if (this.level.startDialog && this.testOption('introDialog')) {
       new MultiView(_.extend(
         {},
         intl.getStartDialog(this.level),
@@ -156,7 +156,7 @@ var Level = Sandbox.extend({
   startOffCommand: function() {
     console.log(this.options);
     var method = this.options.command.get('method');
-    if (!this.testOption('noStartCommand') && method !== 'importLevelNow') {
+    if (this.testOption('startCommand') && method !== 'importLevelNow') {
       Main.getEventBaton().trigger(
         'commandSubmitted',
         'hint; delay 2000; show goal'
@@ -428,7 +428,7 @@ var Level = Sandbox.extend({
     var best = this.getNumSolutionCommands();
 
     GlobalState.isAnimating = true;
-    var skipFinishDialog = this.testOption('noFinishDialog');
+    var skipFinishDialog = true;
     var finishAnimationChain = this.mainVis.gitVisuals.finishAnimation();
     if (this.mainVis.originVis) {
       finishAnimationChain = finishAnimationChain.then(

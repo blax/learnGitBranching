@@ -6802,7 +6802,7 @@ var initDemo = function(sandbox) {
         );
       }
     });
-  } else if (!params.hasOwnProperty('NODEMO')) {
+  } else if (params.hasOwnProperty('showHelp')) {
     commands = [
       "git help;",
       "delay 1000;",
@@ -14269,7 +14269,7 @@ var Level = Sandbox.extend({
 
     // if there is a multiview in the beginning, open that
     // and let it resolve our deferred
-    if (this.level.startDialog && !this.testOption('noIntroDialog')) {
+    if (this.level.startDialog && this.testOption('introDialog')) {
       new MultiView(_.extend(
         {},
         intl.getStartDialog(this.level),
@@ -14359,7 +14359,7 @@ var Level = Sandbox.extend({
   startOffCommand: function() {
     console.log(this.options);
     var method = this.options.command.get('method');
-    if (!this.testOption('noStartCommand') && method !== 'importLevelNow') {
+    if (this.testOption('startCommand') && method !== 'importLevelNow') {
       Main.getEventBaton().trigger(
         'commandSubmitted',
         'hint; delay 2000; show goal'
@@ -14631,7 +14631,7 @@ var Level = Sandbox.extend({
     var best = this.getNumSolutionCommands();
 
     GlobalState.isAnimating = true;
-    var skipFinishDialog = this.testOption('noFinishDialog');
+    var skipFinishDialog = true;
     var finishAnimationChain = this.mainVis.gitVisuals.finishAnimation();
     if (this.mainVis.originVis) {
       finishAnimationChain = finishAnimationChain.then(
@@ -37804,4 +37804,4 @@ exports.level = {
   }
 };
 
-},{}]},{},[11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,68,69,67,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96])
+},{}]},{},[11,12,13,14,15,16,17,18,19,20,21,22,24,23,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,45,44,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,70,69,68,71,72,74,73,75,76,77,78,79,80,81,82,83,84,85,86,87,89,88,91,90,92,93,94,95,96])

@@ -202,7 +202,7 @@ var initDemo = function(sandbox) {
         );
       }
     });
-  } else if (!params.hasOwnProperty('NODEMO')) {
+  } else if (params.hasOwnProperty('showHelp')) {
     commands = [
       "git help;",
       "delay 1000;",
